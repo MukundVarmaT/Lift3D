@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Lift3D</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.css">
+        <link rel="stylesheet" href="style.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.3/clipboard.min.js"></script>
+    </head>
+    <body>
+        <div class="container" id="main">
+            <div class="row">
+                <h2 class="col-md-12 text-center">
+                    Lift3D: Zero-Shot Lifting of Any 2D Vision Model to 3D <br>
+                    <small>
+                        CVPR 2024
+                    </small>
+                </h2>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <ul class="list-inline">
+                        <li>
+                            <a href="https://mukundvarmat.github.io/">
+                            Mukund Varma T<sup>1</sup>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://peihaowang.github.io/">
+                            Peihao Wang<sup>2</sup>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://zhiwenfan.github.io/">
+                            Zhiwen Fan<sup>2</sup>
+                            </a>
+                        </li>
+                        <br>
+                        <li>
+                            <a href="https://vita-group.github.io">
+                            Zhangyang Wang<sup>2</sup>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://cseweb.ucsd.edu/~haosu/">
+                            Hao Su<sup>1</sup>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://cseweb.ucsd.edu/~ravir/">
+                            Ravi Ramamoorthi<sup>1</sup>
+                            </a>
+                        </li>
+                        <br>
+                        <li>
+                            <sup>1</sup>University of California at San Diego
+                        </li>
+                        <li>
+                            <sup>2</sup>University of Texas at Austin
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4 text-center">
+                    <ul class="list-inline">
+                        <li>
+                            <a href="">
+                                <image src="assets/pdf.png" height="80px">
+                                <h4><strong>Paper</strong></h4>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <image src="assets/github.png" height="80px">
+                                <h4><strong>Code</strong></h4>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <center>
+                        <image src="assets/teaser.gif" width="80%">
+                    </center>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <center>
+                    <h3>
+                        Abstract
+                    </h3>
+                    </center>
+                    <p class="text-justify">
+                        <i>In recent years, there has been an explosion of 2D vision models for numerous tasks such as semantic segmentation, style transfer or scene editing, enabled by large-scale 2D image datasets.  At the same time, there has been renewed interest in 3D scene representations such as neural radiance fields from multi-view images.  However, the availability of 3D or multiview data is still substantially limited compared to 2D image datasets, making extending 2D vision models to 3D data highly desirable but also very challenging.  Indeed, extending a single 2D vision operator like scene editing to 3D typically requires a highly creative method specialized to that task and often requires per-scene optimization.  In this paper, we ask the question of whether <b>any</b> 2D vision model can be lifted to make 3D consistent predictions.  We answer this question in the affirmative; our new Lift3D method trains to predict unseen views on feature spaces generated by a few visual models (i.e. DINO and CLIP), but then generalizes to novel vision operators and tasks, such as style transfer, super-resolution, open vocabulary segmentation and image colorization; for some of these tasks, there is no comparable previous 3D method.  In many cases, we even outperform state-of-the-art methods specialized for the task in question.  Moreover, Lift3D is a zero-shot method, in the sense that it requires no task-specific training, nor scene-specific optimization.</i>
+                    </p>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <center>
+                        <image src="assets/pipeline.png" class="img-responsive" alt="overview" width="100%" style="max-height: 450px;margin:auto;">
+                    </center>
+                    <p>
+                        Overview of <i>Lift3D</i>: a) Given multi-view images of a scene, we first extract an intermediate feature map using an encoder for each view independently, b) Using the source view features, we estimate the target view feature map via an extended generalizable novel view synthesis pipeline that learns to correct feature space inconsistency and fuse information according to 3D geometry priors, and c) Directly use the decoder from the pre-trained visual model to process the estimated feature map and synthesize the final prediction for downstream tasks.
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <center>
+                    <h3>
+                        Gallery of Tasks
+                    </h3>
+                    </center>
+                    <center>
+                        <image src="assets/gallery.png" width="100%">
+                    </center>
+                    <center>
+                    <p>
+                        We illustrate a representative collection of tasks / 2D vision models Lift3D can realize in 3D. In practice, our model can generalize to any 2D vision operator out of the box without any extra tuning. 
+                        In each row, we compare the outputs from the 2D vision models (left) operating independently on two views of a scene and our 3D "lifted" realization (right) of the same. 
+                    </p>
+                    </center>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <h3>
+                        Citation
+                    </h3>
+                    <pre>
+</pre>
+                </div>
+            </div>
+        </div>
+    </body>
+    <footer>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <p class="text-center">
+                    This website is adapted from <a href="http://mgharbi.com/">Michaël Gharbi</a>.
+                </p>
+            </div>
+        </div>
+    </footer>
+</html>
