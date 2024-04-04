@@ -1,4 +1,4 @@
-# Is Attention All That NeRF Needs?
+# Lift3D: Zero-Shot Lifting of Any 2D Vision Model to 3D
 [Mukund Varma T](https://mukundvarmat.github.io/)<sup>1</sup>,
 [Peihao Wang](https://peihaowang.github.io/)<sup>2</sup>,
 [Zhiwen Fan](https://zhiwenfan.github.io/)<sup>2</sup>,
